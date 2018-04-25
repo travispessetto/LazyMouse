@@ -33,7 +33,7 @@ public class MouseMover implements Runnable, GlobalKeyListener {
 			mRobot = new Robot();
 			while(!Thread.interrupted())
 			{
-				Thread.sleep(10000);
+				Thread.sleep(60000);
 				MouseOS mouseOS = new MouseOS();
 				Point newPosition = MouseInfo.getPointerInfo().getLocation();
 				if(mPosition.getX() == newPosition.getX() && mPosition.getY() == newPosition.getY())
