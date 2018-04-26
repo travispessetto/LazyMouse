@@ -13,8 +13,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.imageio.ImageIO;
 
+import com.pessetto.lazymouse.settings.SettingsFXMLThread;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class MouseTrayIcon implements ActionListener
 {
@@ -39,9 +45,13 @@ public class MouseTrayIcon implements ActionListener
 	public void actionPerformed(ActionEvent actionEvent)
 	{
 		if(actionEvent.getActionCommand().equals("Exit"))
-		{;
+		{
 		    mSystemTray.remove(mTrayIcon);
 			mExit.set(true);
+		}
+		else if(actionEvent.getActionCommand().equals("Settings"))
+		{
+			showSettingsWindow();
 		}
 		
 	}
@@ -67,11 +77,33 @@ public class MouseTrayIcon implements ActionListener
 		}
 	}
 	
+	
+	private void showSettingsWindow()
+	{
+		try
+		{
+			SettingsFXMLThread fxmlThread = new SettingsFXMLThread();
+			Thread thread = new Thread(fxmlThread);
+			thread.start();
+			thread.join();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace(System.err);
+		}
+	}
+	
 	private void createTrayMenu()
 	{
 		mTrayMenu = new PopupMenu();
+		
+		MenuItem settingsItem = new MenuItem("Settings");
+		settingsItem.addActionListener(this);
+			
 		MenuItem exitItem = new MenuItem("Exit");
 		exitItem.addActionListener(this);
+		
+		mTrayMenu.add(settingsItem);
 		mTrayMenu.add(exitItem);
 	}
 
