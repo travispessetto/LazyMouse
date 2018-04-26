@@ -2,12 +2,13 @@ package com.pessetto.lazymouse.settings;
 
 import java.io.IOException;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class SettingsFXMLThread implements Runnable{
+public class SettingsThread extends Application implements Runnable{
 
 	@Override
 	public void run() {
@@ -25,6 +26,12 @@ public class SettingsFXMLThread implements Runnable{
 			ex.printStackTrace(System.err);
 			System.err.println("Failed to open FXML file");
 		}
+		
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 

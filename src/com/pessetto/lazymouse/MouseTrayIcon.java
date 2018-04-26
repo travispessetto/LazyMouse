@@ -13,8 +13,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.imageio.ImageIO;
 
-import com.pessetto.lazymouse.settings.SettingsFXMLThread;
+import com.pessetto.lazymouse.settings.SettingsThread;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -82,10 +83,10 @@ public class MouseTrayIcon implements ActionListener
 	{
 		try
 		{
-			SettingsFXMLThread fxmlThread = new SettingsFXMLThread();
-			Thread thread = new Thread(fxmlThread);
-			thread.start();
-			thread.join();
+			SettingsThread st = new SettingsThread();
+			Thread rt = new Thread(st);
+			rt.start();
+			rt.join();
 		}
 		catch(Exception ex)
 		{
